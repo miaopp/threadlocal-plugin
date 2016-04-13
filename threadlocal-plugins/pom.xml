@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>threadlocal-plugin</artifactId>
+        <groupId>sonarqube.extension.plugin</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>threadlocal-plugins</artifactId>
+    <packaging>sonar-plugin</packaging>
+
+    <name>threadlocal-plugins</name>
+    <description>use threadLocal plugin to judge the threadLocal using is right.</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.min.version>1.7</jdk.min.version>
+        <sonar.pluginClass>com.qunar.flight.extension.plugin.JavaExtensionRulesPlugin</sonar.pluginClass>
+        <sonar.pluginName>Java</sonar.pluginName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-java-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sonarsource.sslr-squid-bridge</groupId>
+            <artifactId>sslr-squid-bridge</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.sonar.sslr</groupId>
+                    <artifactId>sslr-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>java-squid</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>sonarqube.extension.plugin</groupId>
+            <artifactId>threadlocal-plugin-frontend</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>sonarqube.extension.plugin</groupId>
+            <artifactId>threadlocal-plugin-frontend</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-plugin-size</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <rules>
+                                <requireFilesSize>
+                                    <maxsize>7500000</maxsize>
+                                    <minsize>5800000</minsize>
+                                    <files>
+                                        <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                                    </files>
+                                </requireFilesSize>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

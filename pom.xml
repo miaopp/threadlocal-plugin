@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>threadlocal-plugin-frontend</module>
+        <module>threadlocal-plugin-check</module>
+        <module>threadlocal-plugins</module>
+    </modules>
+
+    <parent>
+        <groupId>org.sonarsource.parent</groupId>
+        <artifactId>parent</artifactId>
+        <version>31</version>
+    </parent>
+
+    <groupId>sonarqube.extension.plugin</groupId>
+    <artifactId>threadlocal-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>threadlocal-plugin</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <sslr.version>1.21</sslr.version>
+        <sslr-squid-bridge.version>2.6.1</sslr-squid-bridge.version>
+        <java.plugin.version>3.12</java.plugin.version>
+        <asm-debug-all.version>5.0.3</asm-debug-all.version>
+        <maven-project.version>2.0.7</maven-project.version>
+        <sslr-testing-harness.version>1.21</sslr-testing-harness.version>
+        <junit.version>4.11</junit.version>
+        <fest-assert.version>1.4</fest-assert.version>
+        <mockito-all.version>1.9.0</mockito-all.version>
+        <logback-classic.version>0.9.30</logback-classic.version>
+        <sonar-plugin-api.version>5.0.1</sonar-plugin-api.version>
+        <sonar-java-api.version>5.1</sonar-java-api.version>
+        <java-squid.version>3.10</java-squid.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.sonarsource.sslr</groupId>
+                <artifactId>sslr-core</artifactId>
+                <version>${sslr.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.sslr-squid-bridge</groupId>
+                <artifactId>sslr-squid-bridge</artifactId>
+                <version>${sslr-squid-bridge.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>sonar-compat</artifactId>
+                <version>${java.plugin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-maven-model</artifactId>
+                <version>${java.plugin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm-debug-all</artifactId>
+                <version>${asm-debug-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-project</artifactId>
+                <version>${maven-project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.sslr</groupId>
+                <artifactId>sslr-testing-harness</artifactId>
+                <version>${sslr-testing-harness.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.easytesting</groupId>
+                <artifactId>fest-assert</artifactId>
+                <version>${fest-assert.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-plugin-api</artifactId>
+                <version>${sonar-plugin-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-java-api</artifactId>
+                <version>${sonar-java-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-checks</artifactId>
+                <version>${java.plugin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-squid</artifactId>
+                <version>${java-squid.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

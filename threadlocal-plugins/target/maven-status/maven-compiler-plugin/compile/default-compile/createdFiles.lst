@@ -1,0 +1,10 @@
+com\qunar\flight\extension\plugin\JavaCommonRulesDecorator.class
+com\qunar\flight\extension\plugin\JavaCommonRulesEngine.class
+com\qunar\flight\extension\plugin\batch\Java.class
+com\qunar\flight\extension\plugin\JavaExtensionRulesCheckRegistrar.class
+com\qunar\flight\extension\plugin\batch\RulesSensor.class
+com\qunar\flight\extension\plugin\rules\JavaExtensionRulesDefinition.class
+com\qunar\flight\extension\plugin\bridges\DesignBridge.class
+com\qunar\flight\extension\plugin\bridges\DsmSerializer.class
+com\qunar\flight\extension\plugin\rules\RulesDefinitionAnnotationLoader.class
+com\qunar\flight\extension\plugin\JavaExtensionRulesPlugin.class

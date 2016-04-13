@@ -1,0 +1,8 @@
+com\qunar\flight\rules\ThreadLocalRemoveRule.class
+com\qunar\flight\RulesList.class
+com\qunar\flight\rules\ThreadLocalRemoveVisitor.class
+com\qunar\flight\rules\ThreadLocalRemoveVisitor$KeyPair.class
+com\qunar\flight\rules\ThreadLocalRemoveRule$AllFileEndProcessor.class
+com\qunar\flight\rules\CycleBetweenPackagesCheck.class
+com\qunar\flight\rules\ThreadLocalRemoveTestRule$AllTestFileEndProcessor.class
+com\qunar\flight\rules\ThreadLocalRemoveTestRule.class

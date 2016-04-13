@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: Paul
+Build-Jdk: 1.6.0_01
+Specification-Title: Struts Core
+Specification-Version: 1.3.9
+Specification-Vendor: Apache Software Foundation
+Implementation-Title: Struts Core
+Implementation-Version: 1.3.9
+Implementation-Vendor-Id: org.apache.struts
+Implementation-Vendor: Apache Software Foundation
+

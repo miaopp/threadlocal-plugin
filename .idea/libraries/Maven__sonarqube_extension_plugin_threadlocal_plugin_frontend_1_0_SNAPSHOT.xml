@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: sonarqube.extension.plugin:threadlocal-plugin-frontend:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/sonarqube/extension/plugin/threadlocal-plugin-frontend/1.0-SNAPSHOT/threadlocal-plugin-frontend-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/flight-sonar-plugin-frontend/threadlocal-plugin-frontend-1.0-SNAPSHOT-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/sonarqube/extension/plugin/threadlocal-plugin-frontend/1.0-SNAPSHOT/threadlocal-plugin-frontend-1.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/flight-sonar-plugin-frontend/threadlocal-plugin-frontend-1.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/sonarqube/extension/plugin/threadlocal-plugin-frontend/1.0-SNAPSHOT/threadlocal-plugin-frontend-1.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

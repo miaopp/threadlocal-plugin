@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flight-qunar-plugin.iml" filepath="$PROJECT_DIR$/flight-qunar-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/threadlocal-plugin-check/threadlocal-plugin-check.iml" filepath="$PROJECT_DIR$/threadlocal-plugin-check/threadlocal-plugin-check.iml" />
+      <module fileurl="file://$PROJECT_DIR$/threadlocal-plugin-frontend/threadlocal-plugin-frontend.iml" filepath="$PROJECT_DIR$/threadlocal-plugin-frontend/threadlocal-plugin-frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/threadlocal-plugins/threadlocal-plugins.iml" filepath="$PROJECT_DIR$/threadlocal-plugins/threadlocal-plugins.iml" />
+    </modules>
+  </component>
+</project>

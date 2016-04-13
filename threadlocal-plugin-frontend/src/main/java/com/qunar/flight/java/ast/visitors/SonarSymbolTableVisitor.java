@@ -1,0 +1,168 @@
+/*
+ * SonarQube Java Copyright (C) 2012-2016 SonarSource SA mailto:contact AT sonarsource DOT com This program is free
+ * software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public License along with this program; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+package com.qunar.flight.java.ast.visitors;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.qunar.flight.java.model.InternalSyntaxToken;
+import com.qunar.flight.java.resolve.SemanticModel;
+import com.qunar.flight.java.resolve.Symbols;
+import com.qunar.flight.plugins.java.api.semantic.Symbol;
+import com.qunar.flight.plugins.java.api.tree.BaseTreeVisitor;
+import com.qunar.flight.plugins.java.api.tree.ClassTree;
+import com.qunar.flight.plugins.java.api.tree.CompilationUnitTree;
+import com.qunar.flight.plugins.java.api.tree.EnumConstantTree;
+import com.qunar.flight.plugins.java.api.tree.IdentifierTree;
+import com.qunar.flight.plugins.java.api.tree.ImportTree;
+import com.qunar.flight.plugins.java.api.tree.LabeledStatementTree;
+import com.qunar.flight.plugins.java.api.tree.MemberSelectExpressionTree;
+import com.qunar.flight.plugins.java.api.tree.MethodTree;
+import com.qunar.flight.plugins.java.api.tree.Tree;
+import com.qunar.flight.plugins.java.api.tree.TypeParameterTree;
+import com.qunar.flight.plugins.java.api.tree.VariableTree;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import org.sonar.api.source.Symbolizable;
+
+public class SonarSymbolTableVisitor extends BaseTreeVisitor {
+
+    private final SemanticModel semanticModel;
+    private final Symbolizable symbolizable;
+    private final Symbolizable.SymbolTableBuilder symbolTableBuilder;
+    private CompilationUnitTree outerClass;
+
+    public SonarSymbolTableVisitor(Symbolizable symbolizable, SemanticModel semanticModel) {
+        this.symbolizable = symbolizable;
+        this.semanticModel = semanticModel;
+        this.symbolTableBuilder = symbolizable.newSymbolTableBuilder();
+    }
+
+    @Override
+    public void visitCompilationUnit(CompilationUnitTree tree) {
+        if (outerClass == null) {
+            outerClass = tree;
+        }
+        super.visitCompilationUnit(tree);
+
+        if (tree.equals(outerClass)) {
+            symbolizable.setSymbolTable(symbolTableBuilder.build());
+        }
+    }
+
+    @Override
+    public void visitClass(ClassTree tree) {
+        IdentifierTree simpleName = tree.simpleName();
+        if (simpleName != null) {
+            createSymbol(simpleName, tree.symbol().usages());
+        }
+        for (TypeParameterTree typeParameterTree : tree.typeParameters()) {
+            createSymbol(typeParameterTree.identifier(), typeParameterTree);
+        }
+        super.visitClass(tree);
+    }
+
+    @Override
+    public void visitVariable(VariableTree tree) {
+        createSymbol(tree.simpleName(), tree.symbol().usages());
+        super.visitVariable(tree);
+    }
+
+    @Override
+    public void visitEnumConstant(EnumConstantTree tree) {
+        createSymbol(tree.simpleName(), tree);
+        super.visitEnumConstant(tree);
+    }
+
+    @Override
+    public void visitMethod(MethodTree tree) {
+        List<IdentifierTree> usages = tree.symbol().usages();
+        if (tree.symbol().returnType() == null) {
+            if (tree.symbol().owner().isEnum()) {
+                // as long as SONAR-5894 is not fixed, do not provide references to enum constructors
+                createSymbol(tree.simpleName(), Lists.<IdentifierTree> newArrayList());
+            } else {
+                // as long as SONAR-5894 is not fixed, only provides references to constructors using direct call (with
+                // same name), and consequently
+                // discard usages of this()/super()
+                String constructorName = tree.simpleName().name();
+                ArrayList<IdentifierTree> filteredUsages = Lists.newArrayList(Iterables.filter(usages,
+                        new SameNameFilter(constructorName)));
+                createSymbol(tree.simpleName(), filteredUsages);
+            }
+        } else {
+            createSymbol(tree.simpleName(), usages);
+        }
+        super.visitMethod(tree);
+    }
+
+    @Override
+    public void visitLabeledStatement(LabeledStatementTree tree) {
+        createSymbol(tree.label(), tree.symbol().usages());
+        super.visitLabeledStatement(tree);
+    }
+
+    @Override
+    public void visitImport(ImportTree tree) {
+        IdentifierTree identifierTree;
+        if (tree.qualifiedIdentifier().is(Tree.Kind.IDENTIFIER)) {
+            identifierTree = (IdentifierTree) tree.qualifiedIdentifier();
+        } else {
+            identifierTree = ((MemberSelectExpressionTree) tree.qualifiedIdentifier()).identifier();
+        }
+        // Exclude on demands imports
+        if (!"*".equals(identifierTree.name())) {
+            createSymbol(identifierTree, tree);
+        }
+        super.visitImport(tree);
+    }
+
+    private void createSymbol(IdentifierTree declaration, Tree tree) {
+        Symbol semanticSymbol = semanticModel.getSymbol(tree);
+        if (semanticSymbol == null) {
+            semanticSymbol = Symbols.unknownSymbol;
+        }
+        createSymbol(declaration, semanticSymbol.usages());
+    }
+
+    private void createSymbol(IdentifierTree declaration, List<IdentifierTree> usages) {
+        org.sonar.api.source.Symbol symbol = symbolTableBuilder.newSymbol(startOffsetFor(declaration),
+                endOffsetFor(declaration));
+        for (IdentifierTree usage : usages) {
+            symbolTableBuilder.newReference(symbol, startOffsetFor(usage));
+        }
+    }
+
+    private static int startOffsetFor(IdentifierTree tree) {
+        return ((InternalSyntaxToken) tree.identifierToken()).fromIndex();
+    }
+
+    private static int endOffsetFor(IdentifierTree tree) {
+        return ((InternalSyntaxToken) tree.identifierToken()).fromIndex() + tree.identifierToken().text().length();
+    }
+
+    private static class SameNameFilter implements Predicate<IdentifierTree> {
+
+        private final String constructorName;
+
+        public SameNameFilter(String constructorName) {
+            this.constructorName = constructorName;
+        }
+
+        @Override
+        public boolean apply(IdentifierTree input) {
+            return constructorName.equals(input.name());
+        }
+
+    }
+
+}
