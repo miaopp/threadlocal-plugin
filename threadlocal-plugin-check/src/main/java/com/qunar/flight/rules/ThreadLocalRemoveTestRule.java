@@ -13,9 +13,6 @@ import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import com.qunar.flight.plugins.java.api.JavaAllFileEndProcessorManager;
 import com.qunar.flight.plugins.java.api.JavaFileEndProcessor;
 
-/**
- * Created by ping.miao on 2016/4/10.
- */
 @Rule(key = "ThreadLocalTestRemove", name = "The remove method should be used after threadLocal used in test", description = "This rule is be used to avoid threadLocal not being removed in test", priority = Priority.CRITICAL, tags = { "threadlocaltest-bug" })
 @ActivatedByDefault
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.UNDERSTANDABILITY)

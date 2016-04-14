@@ -13,9 +13,6 @@ import org.sonar.api.SonarPlugin;
 import com.qunar.flight.extension.plugin.batch.RulesSensor;
 import com.qunar.flight.extension.plugin.rules.JavaExtensionRulesDefinition;
 
-/**
- * Created by ping.miao on 2016/4/7.
- */
 public class JavaExtensionRulesPlugin extends SonarPlugin {
     public static final String MYREPO_ANALYSE_ACCESSORS_PROPERTY = "sonar.myrepo.analyse.property.accessors";
 

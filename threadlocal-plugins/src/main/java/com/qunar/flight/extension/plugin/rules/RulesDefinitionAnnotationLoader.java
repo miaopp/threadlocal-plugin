@@ -18,9 +18,6 @@ import javax.annotation.CheckForNull;
 import java.lang.reflect.Field;
 import java.util.List;
 
-/**
- * Created by ping.miao on 2016/4/8.
- */
 public class RulesDefinitionAnnotationLoader {
     private static final Logger LOG = LoggerFactory.getLogger(RulesDefinitionAnnotationLoader.class);
 

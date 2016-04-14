@@ -14,9 +14,6 @@ import com.qunar.flight.plugins.java.api.tree.MethodInvocationTree;
 import com.qunar.flight.plugins.java.api.tree.Tree;
 import com.qunar.flight.plugins.java.api.tree.VariableTree;
 
-/**
- * Created by ping.miao on 2016/4/8.
- */
 public class ThreadLocalRemoveVisitor extends BaseTreeVisitor implements JavaFileScanner {
     private JavaFileScannerContext context;
 

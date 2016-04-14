@@ -56,7 +56,7 @@
 
         <dependency>
             <groupId>sonarqube.extension.plugin</groupId>
-            <artifactId>threadlocal-plugin-frontend</artifactId>
+            <artifactId>threadlocal-plugin-check</artifactId>
             <version>${project.version}</version>
         </dependency>
 

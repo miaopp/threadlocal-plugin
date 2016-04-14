@@ -6,9 +6,6 @@ import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.squidbridge.commonrules.api.CommonRulesDecorator;
 
-/**
- * Created by ping.miao on 2016/4/8.
- */
 public class JavaCommonRulesDecorator extends CommonRulesDecorator {
     public JavaCommonRulesDecorator(FileSystem fs, CheckFactory checkFactory, ResourcePerspectives resourcePerspective) {
         super(Java.KEY, fs, checkFactory, resourcePerspective);

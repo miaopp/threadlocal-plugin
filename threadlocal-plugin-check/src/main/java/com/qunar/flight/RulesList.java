@@ -7,9 +7,6 @@ import com.qunar.flight.rules.ThreadLocalRemoveRule;
 
 import java.util.List;
 
-/**
- * Created by ping.miao on 2016/4/12.
- */
 public class RulesList {
     public static final String REPOSITORY_KEY = "myrepo";
 

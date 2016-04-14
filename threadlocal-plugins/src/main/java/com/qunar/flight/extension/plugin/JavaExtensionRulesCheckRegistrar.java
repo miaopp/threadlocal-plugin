@@ -7,9 +7,6 @@ import com.qunar.flight.rules.ThreadLocalRemoveRule;
 
 import java.util.Arrays;
 
-/**
- * Created by ping.miao on 2016/4/8.
- */
 public class JavaExtensionRulesCheckRegistrar implements CheckRegistrar {
     @Override
     public void register(RegistrarContext registrarContext) {

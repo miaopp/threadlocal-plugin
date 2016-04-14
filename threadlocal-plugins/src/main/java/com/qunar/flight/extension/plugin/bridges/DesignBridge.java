@@ -29,9 +29,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by ping.miao on 2016/4/12.
- */
 public class DesignBridge {
     private static final Logger LOG = LoggerFactory.getLogger(DesignBridge.class);
 

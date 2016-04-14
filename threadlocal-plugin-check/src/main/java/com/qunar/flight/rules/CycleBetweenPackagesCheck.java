@@ -10,9 +10,6 @@ import org.sonar.squidbridge.annotations.SqaleSubCharacteristic;
 import com.qunar.flight.RulesList;
 import com.qunar.flight.java.bytecode.visitor.BytecodeVisitor;
 
-/**
- * Created by ping.miao on 2016/4/12.
- */
 @Rule(key = CycleBetweenPackagesCheck.KEY, name = "Cycles between packages should be removed", priority = Priority.MAJOR, tags = { "design" })
 @SqaleSubCharacteristic(RulesDefinition.SubCharacteristics.ARCHITECTURE_CHANGEABILITY)
 @SqaleConstantRemediation("1d")

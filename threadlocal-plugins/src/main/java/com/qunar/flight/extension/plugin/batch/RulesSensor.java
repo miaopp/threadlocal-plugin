@@ -31,9 +31,6 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by ping.miao on 2016/4/7.
- */
 @Phase(name = Phase.Name.PRE)
 @DependsUpon(JavaUtils.BARRIER_BEFORE_SQUID)
 @DependedUpon(value = JavaUtils.BARRIER_AFTER_SQUID)

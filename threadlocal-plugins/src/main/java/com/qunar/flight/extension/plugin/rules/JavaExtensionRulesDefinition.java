@@ -5,9 +5,6 @@ import com.qunar.flight.extension.plugin.batch.Java;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.squidbridge.annotations.AnnotationBasedRulesDefinition;
 
-/**
- * Created by ping.miao on 2016/4/7.
- */
 public class JavaExtensionRulesDefinition implements RulesDefinition {
     @Override
     public void define(Context context) {

@@ -7,9 +7,6 @@ import org.sonar.api.resources.AbstractLanguage;
 
 import java.util.List;
 
-/**
- * Created by ping.miao on 2016/4/7.
- */
 public class Java extends AbstractLanguage {
 
     /**
